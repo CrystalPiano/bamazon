@@ -1,5 +1,3 @@
-drop database bamazondb;
-
 create database bamazondb;
 
 USE bamazondb;

@@ -24,12 +24,12 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId + "\n");
-  createProduct();
+  readProducts();
+  //runBamazon();
 });
 
 
 /*
-// Adding items to the table in the bamazondb
 function createProduct() {
     console.log("Inserting new products...\n");
     var query = connection.query(
@@ -49,11 +49,8 @@ function createProduct() {
 
     // logs the actual query being run
     console.log(query.sql);
-}; */
+};
 
-
-
-/*
 function updateProduct() {
   console.log("Updating stock quantity of selected item...\n");
   var query = connection.query(
@@ -89,6 +86,7 @@ function deleteProduct() {
     }
   );
 };
+*/
 
 function readProducts() {
   console.log("Selecting all products...\n");
@@ -99,4 +97,51 @@ function readProducts() {
     connection.end();
   });
 };
-*/
+
+function verifyQuantity() {
+  console.log("How many would you like?");
+};
+
+function buyProducts() {
+  console.log("That will cost a total of " + total);
+};
+
+function runBamazon() {
+  inquirer
+    .prompt({
+      name: "action",
+      type: "list",
+      message: "What would you like to purchase? Please select by item ID.",
+      choices: [
+        "Shake Weight",
+        "Cool Water Bottle",
+        "Reusable Rocket",
+        "NASA Tee Shirt",
+        "Dog Leash",
+        "Dog Food",
+        "Human Food",
+        "Massive Square Watermelon",
+        "Chunk Of Gold",
+        "Chunk Of Coal"
+      ]
+    })
+    .then(function(answer) {
+      switch (answer.action) {
+        case "Shake Weight":
+          verifyQuantity();
+          break;
+
+        case "Cool Water Bottle":
+          verifyQuantity();
+          break;
+
+        case "Reusable Rocket":
+          verifyQuantity();
+          break;
+
+        case "NASA Tee Shirt":
+          verifyQuantity();
+          break;
+      }
+    });
+}
