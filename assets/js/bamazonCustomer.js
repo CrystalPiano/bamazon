@@ -10,7 +10,7 @@
 
 */
 
-var inquire = require("inquire");
+var inquirer = require("inquirer");
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
@@ -24,8 +24,8 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId + "\n");
-  readProducts();
-  //runBamazon();
+  //readProducts();
+  runBamazon();
 });
 
 
@@ -99,19 +99,35 @@ function readProducts() {
 };
 
 function verifyQuantity() {
-  console.log("How many would you like?");
+  inquirer
+    .prompt([
+      {
+        name: "quantityCheck",
+        type: "input",
+        message: "How many would you like?",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
+      }
+    ])
 };
 
+/*
 function buyProducts() {
   console.log("That will cost a total of " + total);
 };
+*/
+
 
 function runBamazon() {
   inquirer
     .prompt({
       name: "action",
       type: "list",
-      message: "What would you like to purchase? Please select by item ID.",
+      message: "What would you like to purchase?",
       choices: [
         "Shake Weight",
         "Cool Water Bottle",
@@ -140,6 +156,30 @@ function runBamazon() {
           break;
 
         case "NASA Tee Shirt":
+          verifyQuantity();
+          break;
+
+        case "Dog Leash":
+          verifyQuantity();
+          break;  
+
+        case "Dog Food":
+          verifyQuantity();
+          break;
+
+        case "Human Food":
+          verifyQuantity();
+          break;
+
+        case "Massive Square Watermelon":
+          verifyQuantity();
+          break;
+
+        case "Chunk Of Gold":
+          verifyQuantity();
+          break;
+
+        case "Chunk Of Coal":
           verifyQuantity();
           break;
       }
