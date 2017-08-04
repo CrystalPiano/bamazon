@@ -104,23 +104,26 @@ function verifyQuantity() {
       {
         name: "quantityCheck",
         type: "input",
-        message: "How many would you like?",
-        validate: function(value) {
-          if (isNaN(value) === false) {
-            return true;
-          }
-          return false;
-        }
+        message: "How many would you like?"
       }
-    ])
-};
+    .then(function(answer) {
+      if (answer.quanityCheck < stock_quantity /* NEED Proper syntax */ )) {
+        console.log("There is not enough inventory to fulfill your request");
+      }
+      else {
+        purchaseItem();
+      }
+    });
 
-/*
+
 function buyProducts() {
+  Var total = answer.quanityCheck * Products.price 
   console.log("That will cost a total of " + total);
 };
-*/
 
+function purchaseItem() {
+  console.log(Verifying Purchase);
+};
 
 function runBamazon() {
   inquirer
