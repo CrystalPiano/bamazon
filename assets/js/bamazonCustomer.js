@@ -8,6 +8,8 @@
 -Deduct amount of items purchased from the over all item quantity
 -Show user total price of items purchased
 
+
+-Response object
 */
 
 var inquirer = require("inquirer");
@@ -24,8 +26,8 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId + "\n");
-  //readProducts();
-  runBamazon();
+  readProducts();
+  //runBamazon();
 });
 
 
@@ -88,6 +90,7 @@ function deleteProduct() {
 };
 */
 
+
 function readProducts() {
   console.log("Selecting all products...\n");
   connection.query("SELECT * FROM products", function(err, res) {
@@ -125,65 +128,21 @@ function purchaseItem() {
 };
 
 function runBamazon() {
-  inquirer
-    .prompt({
-      name: "action",
-      type: "list",
-      message: "What would you like to purchase?",
-      choices: [
-        "Shake Weight",
-        "Cool Water Bottle",
-        "Reusable Rocket",
-        "NASA Tee Shirt",
-        "Dog Leash",
-        "Dog Food",
-        "Human Food",
-        "Massive Square Watermelon",
-        "Chunk Of Gold",
-        "Chunk Of Coal"
-      ]
+
+};
+
+
+function displayProducts(){
+    var query = "SELECT * FROM products";
+    
+    console.log("BAMAZON PRODUCTS FOR SALE")
+    console.log("-------------------------")
+      connection.query(query, function(err, res) {
+        //if err throw err;
+        for (var i = 0; i < res.length; i++) {
+          console.log(res[i].item_id + ". " + res[i].product_name + " ($" + res[i].price + ")");
+        }
+        buyPrompt(res);
     })
-    .then(function(answer) {
-      switch (answer.action) {
-        case "Shake Weight":
-          verifyQuantity();
-          break;
-
-        case "Cool Water Bottle":
-          verifyQuantity();
-          break;
-
-        case "Reusable Rocket":
-          verifyQuantity();
-          break;
-
-        case "NASA Tee Shirt":
-          verifyQuantity();
-          break;
-
-        case "Dog Leash":
-          verifyQuantity();
-          break;  
-
-        case "Dog Food":
-          verifyQuantity();
-          break;
-
-        case "Human Food":
-          verifyQuantity();
-          break;
-
-        case "Massive Square Watermelon":
-          verifyQuantity();
-          break;
-
-        case "Chunk Of Gold":
-          verifyQuantity();
-          break;
-
-        case "Chunk Of Coal":
-          verifyQuantity();
-          break;
-      }
-    });
-}
+    
+};
