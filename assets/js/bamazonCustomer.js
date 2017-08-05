@@ -107,17 +107,16 @@ function verifyQuantity() {
         message: "How many would you like?"
       }
     .then(function(answer) {
-      if (answer.quanityCheck < stock_quantity /* NEED Proper syntax */ )) {
+      if (answer.quanityCheck < stock_quantity /* NEED Proper syntax */ ) {
         console.log("There is not enough inventory to fulfill your request");
       }
       else {
         purchaseItem();
       }
-    });
-
+    }),
 
 function buyProducts() {
-  Var total = answer.quanityCheck * Products.price 
+  Var total = answer.quanityCheck * answer.action(Products.price);
   console.log("That will cost a total of " + total);
 };
 
