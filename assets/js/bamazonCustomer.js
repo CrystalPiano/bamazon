@@ -8,7 +8,6 @@
 -Deduct amount of items purchased from the over all item quantity
 -Show user total price of items purchased
 
-
 -Response object
 */
 
@@ -130,6 +129,9 @@ function purchaseItem() {
 function runBamazon() {
 
 };
+
+// RESTART
+
 
 
 function displayProducts(){
